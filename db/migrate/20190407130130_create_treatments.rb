@@ -7,7 +7,7 @@ class CreateTreatments < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :patients_treatments, id: false do |t|
+    create_table :patients_treatments do |t|
       t.references :treatment, null: false
       t.references :patient, null: false
     end

@@ -8,17 +8,17 @@ class CreateAdmissions < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :admissions_diagnoses, id: false do |t|
+    create_table :admissions_diagnoses do |t|
       t.references :admission, null: false
       t.references :diagnosis, null: false
     end
 
-    create_table :admissions_symptoms, id: false do |t|
+    create_table :admissions_symptoms do |t|
       t.references :admission, null: false
       t.references :symptom, null: false
     end
 
-    create_table :admissions_observations, id: false do |t|
+    create_table :admissions_observations do |t|
       t.references :admission, null: false
       t.references :observation, null: false
     end

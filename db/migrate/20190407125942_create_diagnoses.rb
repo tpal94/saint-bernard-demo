@@ -7,7 +7,7 @@ class CreateDiagnoses < ActiveRecord::Migration[5.2]
     end
 
     # plural of "diagnosis" is "diagnoses".
-    create_table :patients_diagnoses, id: false do |t|
+    create_table :patients_diagnoses do |t|
       t.references :diagnosis, null: false
       t.references :patient, null: false
     end

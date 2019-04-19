@@ -1,6 +1,8 @@
 class Patient < ApplicationRecord
   belongs_to :gender
   belongs_to :admission
+  
+  has_and_belongs_to_many :allergies
 
   has_many :patients_allergies
   has_many :allergies, through: :patients_allergies

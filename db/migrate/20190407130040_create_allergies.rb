@@ -5,7 +5,7 @@ class CreateAllergies < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :patients_allergies, id: false do |t|
+    create_table :patients_allergies do |t|
       t.references :allergy, null: false
       t.references :patient, null: false
     end

@@ -10,13 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_08_021705) do
+ActiveRecord::Schema.define(version: 2019_04_19_032706) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.string "author_type"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
 
   create_table "admissions", force: :cascade do |t|
     t.datetime "moment"
-    t.integer "diagnosis_id"
-    t.integer "symptom_id"
-    t.integer "observation_id"
+    t.bigint "diagnosis_id"
+    t.bigint "symptom_id"
+    t.bigint "observation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["diagnosis_id"], name: "index_admissions_on_diagnosis_id"
@@ -24,23 +41,23 @@ ActiveRecord::Schema.define(version: 2019_04_08_021705) do
     t.index ["symptom_id"], name: "index_admissions_on_symptom_id"
   end
 
-  create_table "admissions_diagnoses", id: false, force: :cascade do |t|
-    t.integer "admission_id", null: false
-    t.integer "diagnosis_id", null: false
+  create_table "admissions_diagnoses", force: :cascade do |t|
+    t.bigint "admission_id", null: false
+    t.bigint "diagnosis_id", null: false
     t.index ["admission_id"], name: "index_admissions_diagnoses_on_admission_id"
     t.index ["diagnosis_id"], name: "index_admissions_diagnoses_on_diagnosis_id"
   end
 
-  create_table "admissions_observations", id: false, force: :cascade do |t|
-    t.integer "admission_id", null: false
-    t.integer "observation_id", null: false
+  create_table "admissions_observations", force: :cascade do |t|
+    t.bigint "admission_id", null: false
+    t.bigint "observation_id", null: false
     t.index ["admission_id"], name: "index_admissions_observations_on_admission_id"
     t.index ["observation_id"], name: "index_admissions_observations_on_observation_id"
   end
 
-  create_table "admissions_symptoms", id: false, force: :cascade do |t|
-    t.integer "admission_id", null: false
-    t.integer "symptom_id", null: false
+  create_table "admissions_symptoms", force: :cascade do |t|
+    t.bigint "admission_id", null: false
+    t.bigint "symptom_id", null: false
     t.index ["admission_id"], name: "index_admissions_symptoms_on_admission_id"
     t.index ["symptom_id"], name: "index_admissions_symptoms_on_symptom_id"
   end
@@ -98,11 +115,11 @@ ActiveRecord::Schema.define(version: 2019_04_08_021705) do
     t.string "last_name"
     t.string "mr"
     t.datetime "dob"
-    t.integer "gender_id"
-    t.integer "admission_id"
-    t.integer "medication_order_id"
-    t.integer "diagnostic_procedure_id"
-    t.integer "treatments_id"
+    t.bigint "gender_id"
+    t.bigint "admission_id"
+    t.bigint "medication_order_id"
+    t.bigint "diagnostic_procedure_id"
+    t.bigint "treatments_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admission_id"], name: "index_patients_on_admission_id"
@@ -112,37 +129,37 @@ ActiveRecord::Schema.define(version: 2019_04_08_021705) do
     t.index ["treatments_id"], name: "index_patients_on_treatments_id"
   end
 
-  create_table "patients_allergies", id: false, force: :cascade do |t|
-    t.integer "allergy_id", null: false
-    t.integer "patient_id", null: false
+  create_table "patients_allergies", force: :cascade do |t|
+    t.bigint "allergy_id", null: false
+    t.bigint "patient_id", null: false
     t.index ["allergy_id"], name: "index_patients_allergies_on_allergy_id"
     t.index ["patient_id"], name: "index_patients_allergies_on_patient_id"
   end
 
-  create_table "patients_diagnoses", id: false, force: :cascade do |t|
-    t.integer "diagnosis_id", null: false
-    t.integer "patient_id", null: false
+  create_table "patients_diagnoses", force: :cascade do |t|
+    t.bigint "diagnosis_id", null: false
+    t.bigint "patient_id", null: false
     t.index ["diagnosis_id"], name: "index_patients_diagnoses_on_diagnosis_id"
     t.index ["patient_id"], name: "index_patients_diagnoses_on_patient_id"
   end
 
-  create_table "patients_diagnostic_procs", id: false, force: :cascade do |t|
-    t.integer "diagnostic_procedure_id", null: false
-    t.integer "patient_id", null: false
+  create_table "patients_diagnostic_procs", force: :cascade do |t|
+    t.bigint "diagnostic_procedure_id", null: false
+    t.bigint "patient_id", null: false
     t.index ["diagnostic_procedure_id"], name: "index_patients_diagnostic_procs_on_diagnostic_procedure_id"
     t.index ["patient_id"], name: "index_patients_diagnostic_procs_on_patient_id"
   end
 
-  create_table "patients_medication_orders", id: false, force: :cascade do |t|
-    t.integer "medication_order_id", null: false
-    t.integer "patient_id", null: false
+  create_table "patients_medication_orders", force: :cascade do |t|
+    t.bigint "medication_order_id", null: false
+    t.bigint "patient_id", null: false
     t.index ["medication_order_id"], name: "index_patients_medication_orders_on_medication_order_id"
     t.index ["patient_id"], name: "index_patients_medication_orders_on_patient_id"
   end
 
-  create_table "patients_treatments", id: false, force: :cascade do |t|
-    t.integer "treatment_id", null: false
-    t.integer "patient_id", null: false
+  create_table "patients_treatments", force: :cascade do |t|
+    t.bigint "treatment_id", null: false
+    t.bigint "patient_id", null: false
     t.index ["patient_id"], name: "index_patients_treatments_on_patient_id"
     t.index ["treatment_id"], name: "index_patients_treatments_on_treatment_id"
   end

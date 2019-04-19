@@ -9,7 +9,7 @@ class CreateMedicationOrders < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    create_table :patients_medication_orders, id: false do |t|
+    create_table :patients_medication_orders do |t|
       t.references :medication_order, null: false
       t.references :patient, null: false
     end
