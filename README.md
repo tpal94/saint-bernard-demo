@@ -28,6 +28,14 @@ $ rails server
 ```
 In your browser, go to http://0.0.0.0:3000/emergency_transfers
 
+
+For the admin panel
+
+go to http://0.0.0.0:3000/admin
+
+You can easily manage all the data.
+
+
 ### How to run the test suite
 
 ```
