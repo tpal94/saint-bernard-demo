@@ -4,7 +4,7 @@ Creates a simple prototype that will evaluate an existing emergency summary temp
 
 ### Ruby / Rails Versions
 ```
-ruby-2.4.0 [ x86_64 ]
+ruby-2.6.1 [ x86_64 ]
 
 Rails 5.2.0
 ```
@@ -13,13 +13,13 @@ Rails 5.2.0
 After cloning this repo you should be able to run:
 ```
 $ bundle install
-$ bin/rake db:migrate
+$ rails db:migrate
 ```
 ### Sample Data
 
 To populate the local sqlite3 database with some sample data, run the following:
 ```
-$ lib/populate_db.rb
+$ rails db:seed
 ```
 ### Run the app
 
